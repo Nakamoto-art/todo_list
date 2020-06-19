@@ -1,8 +1,8 @@
 from django.db import models
-from datetime import datetime
+from datetime import date
 
 
-class task(models.Model):
+class Task(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=500)
-    date = models.DateField(datetime.today)
+    date = models.DateField(default=date.today)
