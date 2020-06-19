@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Index Page</h1>
+<ul>
+    {% for task in tasks %}
+    <li>{{task.title}} {{task.date}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
