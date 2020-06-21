@@ -4,7 +4,10 @@
 <h1>Index Page</h1>
 <ul>
     {% for task in tasks %}
-    <li>{{task.title}} {{task.date}}</li>
+    <li>Title: {{ task.title }}</br>
+        Date: {{ task.date}}</br>
+        TODO: {{ task.text }}
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
