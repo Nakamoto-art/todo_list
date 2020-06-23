@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
+
 <h1>Index Page</h1>
-<ul>
-    {% for task in tasks %}
-    <li>Title: {{ task.title }}</br>
-        Date: {{ task.date}}</br>
-        TODO: {{ task.text }}
-    </li>
-    {% endfor %}
-</ul>
+{{ task_list }}
+
+{% for task in tasks %}
+
+<p>
+    ID: {{ task.id }}</br>
+    Title: {{ task.title }}
+    TODO: {{ task.text }}
+</p>
+
+{% endfor %}
+
 {% endblock %}

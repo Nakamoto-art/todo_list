@@ -9,20 +9,6 @@ def index(request):
     tasks = Task.objects.all()
     return render(request, 'index.html', {'tasks':tasks})
 
-# def create_task(request):
-#     form = TaskForm()
-#     if request.method == 'POST':
-#         form = TaskForm(request.POST)
-#         if form.is_valid():
-#             print(form.cleaned_data)
-#             Task.objects.create(**form.cleaned_data)
-#         else:
-#             print(form.errors )
-
-#     context = {
-#         'form': form
-#     }
-#     return render(request, 'create_task.html', context)
 
 def create_task(request):
     form = TaskForm(request.POST or None)
@@ -37,12 +23,24 @@ def create_task(request):
     return render(request, 'create_task.html', context)
 
 
+def update_task(request, id):
+    task = Task.objects.get(id=id)
+    task_form = TaskForm(request.POST or None, instance=task)
+
+    if task_form.is_valid():
+        print('Printing POST:', request.POST)
+        task_form.save()
+        return redirect('../../')
+    return render(request, 'create_task.html', {'form': task_form})
+
+
 def task_detail(request, id):
     task = get_object_or_404(Task, id=id)
     context = {
         'task': task
     }
     return render(request, 'task_detail.html', context)
+
 
 def delete_task(request, id):
     task = get_object_or_404(Task, id=id)
@@ -53,13 +51,3 @@ def delete_task(request, id):
         "task": task
     }
     return render(request, 'delete_task.html', context)
-
-def update_task(request):
-    pass
-
-def task_list_view(request):
-    queryset = Task.objects.all()
-    context = {
-        'task_list': queryset
-    }
-    return render(request, 'task_list.html', context)
